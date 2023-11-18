@@ -1,6 +1,6 @@
-Texto de prueba para la simulación, es la descripion del repo: 
-Este repositorio tiene como propósito almacenar el código y 
-los recursos necesarios para implementar la simulación de un chat de 
-texto entre una casita del árbol y una habitación de una casa; se tiene 
-planteado simular el chat de texto por medio de decodificación BPSK 
-y una señal de transmisión de radio frecuencia de 2.4GHz.
+Texto de prueba para la simulacion, es la descripion del repo: 
+Este repositorio tiene como proposito almacenar el codigo y 
+los recursos necesarios para implementar la simulacion de un chat de 
+texto entre una casita del arbol y una habitacion de una casa; se tiene 
+planteado simular el chat de texto por medio de decodificacion BPSK 
+y una transmision de radio frecuencia de 2.4GHz.
