@@ -1,10 +1,12 @@
 # =========================================================
 # ---------------------------------------------------------
-# Biblioteca:
+# Bibliotecas:
 import numpy as np
+from CODIFICADOR import *
 # ---------------------------------------------------------
 # =========================================================
 # ----------------------- Main: ---------------------------
+# Carga del mensaje que enviaremos:
 def GET_MENSAJE():
     '''Se carga el archivo de texto, enviado desde la casa para simular.
         Outputs: TEXT (varible que contiene el archivo de texto.)'''
@@ -12,14 +14,15 @@ def GET_MENSAJE():
         TEXT = file.read()
     return TEXT
 
-def SET_CODIFICADOR(MENSAJE):
-    MENSAJE_CODIF = MENSAJE.encode()
-    return MENSAJE_CODIF
+# Codificar el mensaje por el algoritmo de Huffman:
+TEXT = GET_MENSAJE()
+TEXT_CODIF, CODIGOS = CODIFICADOR(TEXT)
 
-MENSAJE = SET_CODIFICADOR(GET_MENSAJE())
 # ---------------------------------------------------------
 print("============================================================")
-print(MENSAJE)
+print("Mensaje de entrada:\n", TEXT)
+print("Mensaje Codificado:\n", TEXT_CODIF)
+print("Codigos:\n", CODIGOS)
 print("============================================================")
 # ---------------------------------------------------------
 # =========================================================
