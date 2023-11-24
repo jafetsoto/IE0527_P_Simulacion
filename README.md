@@ -6,10 +6,15 @@ Simulación de un chat de texto entre la habitación de una casa y una casita en
 
 ## Carga del archivo:
 El mensaje que enviaremos en la simulacion se encuentra en 
-'''
+```
 datasets/INPUT.txt
-'''
+```
 Y la simulación tomará en cuenta que este archivo de text fue previamente generador.
 
 ## Codificacion de la fuente:
+Para la codificación de la funete implementamos el algoritmo de Huffman. El codigó para la codificacion de la funete se encuentra en:
+```
+src/CODIFICADOR.py
+```
 
+## Codificacion del canal:
