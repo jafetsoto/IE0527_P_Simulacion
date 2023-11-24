@@ -1,6 +1,7 @@
-Texto de prueba para la simulacion, es la descripcion del repo: 
-Este repositorio tiene como proposito almacenar el codigo y 
-los recursos necesarios para implementar la simulacion de un chat de 
-texto entre una casita del arbol y una habitacion de una casa; se tiene 
-planteado simular el chat de texto por medio de codificacion BPSK para 
-el envio de la señal y una transmision de radio frecuencia de 2.4GHz.
+Este repositorio almacena el codigo y recursos necesarios para simular 
+la comunicacion entre una habitacion de una casa y una casita de arbol 
+en el jardin; se establece un mensaje de texto de entrada que esta 
+previamente generado, codificamos el mensaje en la fuente utilizando 
+el algoritmo de Huffman y para la codificacion del canal se utilizara 
+Hamming para agregar la capacidad de deteccion de errores; la señal se 
+transmitira por radiofrecuencia.
