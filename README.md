@@ -29,6 +29,6 @@ Para la modulación del codigo generado por el algoritmo de Hamming, utilizaremo
 PySIM/src/PSK.py
 ```
 ### Ejemplo:
-Al resibir el codigo de bits "110101011101", la codificación PSK genera la siguiente señal de salida:
+Al recibir el codigo de bits "110101011101", la codificación PSK genera la siguiente señal de salida:
 
 ![Señal PSK.](images/PSK_EJEMPLO_110101011101.png)
