@@ -1,20 +1,24 @@
 ## IE0527_P_Simulacion:
-Este repositorio almacena el código y recursos necesarios para simular la comunicación entre una habitación de una casa y una casita de árbol en el jardín; se establece un mensaje de texto de entrada que está previamente generado, codificamos el mensaje en la fuente utilizando el algoritmo de Huffman y para la codificación del canal se utilizará Hamming, para agregar la capacidad de detección de errores; la señal se transmitirá por radio frecuencia.
+Este repositorio almacena el código y recursos necesarios para simular la comunicación entre una habitación de una casa y una casita de árbol en el jardín; se establece un mensaje de texto de entrada que está previamente generado, codificamos el mensaje en la fuente utilizando el algoritmo de Huffman y para la codificación del canal se utilizará Hamming para agregar la capacidad de detección de errores; la señal se transmitirá por radiofrecuencia.
 
 # Escenario hipotético: 
-Simulación de un chat de texto entre la habitación de una casa y una casita en el árbol.
+Simulación de un chat de texto, entre la habitación de una casa y una casita en el árbol.
 
 ## Carga del archivo:
-El mensaje que enviaremos en la simulacion se encuentra en 
+El mensaje que enviaremos en la simulacion se encuentra en:
 ```
 datasets/INPUT.txt
 ```
-Y la simulación tomará en cuenta que este archivo de text fue previamente generador.
+Y la simulación tomará en cuenta que este archivo de text fue previamente generado.
 
-## Codificacion de la fuente:
-Para la codificación de la funete implementamos el algoritmo de Huffman. El codigó para la codificacion de la funete se encuentra en:
+## Codificación de la fuente:
+Para la codificación de la fuente implementamos el algoritmo de Huffman. El código para la codificacion de la fuente se encuentra en:
 ```
 src/CODIFICADOR.py
 ```
 
-## Codificacion del canal:
+## Codificación del canal:
+Implementamos el algoritmos de [Hamming](https://www.youtube.com/watch?v=WdmGSWrcMvM) para condificar el código generado en la etapa de codificacion de fuente; este algoritmo nos permite la corrección de errores en la recepción del mensaje, incorporando bits de paridad al código.
+```
+src/HAMMING.py
+```
