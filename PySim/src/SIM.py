@@ -17,7 +17,7 @@ def GET_MENSAJE():
     with open('PySim/datasets/INPUT.txt', 'r') as file:
         TEXT = file.read()
     return TEXT
-def grafica_PSK(PSK_SIGNAL, fs):                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+def graf_Signal(PSK_SIGNAL, fs):                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     # Tiempo de la señal:
     tiempo_total = np.linspace(0, len(PSK_SIGNAL ) / fs, len(PSK_SIGNAL))
     
@@ -41,11 +41,11 @@ TEXT_CANAL = HAMMING(TEXT_CODIF)
 
 # Modular la señal:
 SIGNAL_PSK   = PSK(TEXT_CANAL)
-grafica_PSK(SIGNAL_PSK, 1000)
+graf_Signal(SIGNAL_PSK, 1000)
 
 # Simular transmisión:
 SIGNAL_TRANSMIT = Transmision(SIGNAL_PSK, 1000)
-grafica_PSK(SIGNAL_TRANSMIT, 1000)
+graf_Signal(SIGNAL_TRANSMIT, 1000)
 
 # ---------------------------------------------------------
 print("============================================================")
