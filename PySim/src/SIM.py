@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 from CODIFICADOR import *
 from HAMMING import HAMMING
 from PSK import PSK
+from TRANSMISION import Transmision
 # ---------------------------------------------------------
 # =========================================================
 # ----------------------- Main: ---------------------------
@@ -16,20 +17,20 @@ def GET_MENSAJE():
     with open('PySim/datasets/INPUT.txt', 'r') as file:
         TEXT = file.read()
     return TEXT
-def grafica_PSK(PSK_SIGNAL):                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+def grafica_PSK(PSK_SIGNAL, fs):                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     # Tiempo de la señal:
-    tiempo_total = np.linspace(0, len(PSK_SIGNAL ) / 1000, len(PSK_SIGNAL))
+    tiempo_total = np.linspace(0, len(PSK_SIGNAL ) / fs, len(PSK_SIGNAL))
     
     # Graficar la señal:
     plt.figure(figsize=(10, 4))
     plt.plot(tiempo_total, PSK_SIGNAL)
-    plt.title('Señal Modulada PSK')
+    plt.title('Señal.')
     plt.xlabel('Tiempo (s)')
     plt.ylabel('Amplitud')
     plt.grid(True)
     plt.show()
 # ---------------------------------------------------------
-# Cargae el mensaje:
+# Carga el mensaje:
 TEXT = GET_MENSAJE()
 
 # Codificar por Huffman para la funete:
@@ -39,11 +40,12 @@ TEXT_CODIF, CODIGOS = CODIFICADOR(TEXT)
 TEXT_CANAL = HAMMING(TEXT_CODIF)
 
 # Modular la señal:
-TEXT_PSK   = PSK(TEXT_CANAL)
-# grafica_PSK(TEXT_PSK)
+SIGNAL_PSK   = PSK(TEXT_CANAL)
+grafica_PSK(SIGNAL_PSK, 1000)
 
 # Simular transmisión:
-
+SIGNAL_TRANSMIT = Transmision(SIGNAL_PSK, 1000)
+grafica_PSK(SIGNAL_TRANSMIT, 1000)
 
 # ---------------------------------------------------------
 print("============================================================")

@@ -24,7 +24,7 @@ def PSK(CODIGO):
             
             PSK_SIGNAL.extend(B_SIGNAL)
             
-    return PSK_SIGNAL
+    return np.array(PSK_SIGNAL)
 
 '''
 # Prueba
