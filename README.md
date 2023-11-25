@@ -32,3 +32,10 @@ PySIM/src/PSK.py
 Al recibir el codigo de bits "110101011101", la codificación PSK genera la siguiente señal de salida:
 
 ![Señal PSK.](images/PSK_EJEMPLO_110101011101.png)
+
+## Transmisión:
+Simulamos un medio con ruido y una atenuacion de la señal del 50%, para simular componentes y medios ruidosos que podríamos esperar en la aplicación real de un proyecto de este estilo.
+```
+PySIM/src/TRANSMISION.py
+```
+![Señal transmitida.](images/TRANS_EJEMPLO_110101011101.png)
