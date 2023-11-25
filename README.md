@@ -38,4 +38,7 @@ Simulamos un medio con ruido y una atenuacion de la señal del 50%, para simular
 ```
 PySIM/src/TRANSMISION.py
 ```
+### Ejemplo:
+Para la señal transmitida utilizamos el resultado de la señal PSK que diseñamos en la etapa de modulación, el grafico de la señal transmitida es el siguiete:
+
 ![Señal transmitida.](images/TRANS_EJEMPLO_110101011101.png)
