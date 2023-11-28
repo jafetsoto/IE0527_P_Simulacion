@@ -51,6 +51,7 @@ graf_Signal(SIGNAL_TRANSMIT, 1000, 'Señal transmitida.')
 # Demodular la señal recibida: 
 DEMOD_TEXT = DEMOD_BPSK(SIGNAL_TRANSMIT, 1000)
 graf_Signal(DEMOD_TEXT,1000, 'Señal demodulada.')
+
 # ---------------------------------------------------------
 print("============================================================")
 print("Mensaje de entrada   :\n", TEXT)
