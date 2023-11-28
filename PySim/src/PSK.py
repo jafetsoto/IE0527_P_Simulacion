@@ -1,7 +1,11 @@
+# ---------------------------------------------------------
+# Bibliotecas:
 import numpy as np
-import matplotlib.pyplot as plt
-
-def PSK(CODIGO):
+from scipy import signal
+from sklearn import base
+# ---------------------------------------------------------
+# ====================== Modulador: =======================
+def BPSK(CODIGO):
     # ---- Parametros de la portadora: ------
     Frecuencia = 1000
     Amplitud   = 1.0
@@ -25,21 +29,26 @@ def PSK(CODIGO):
             PSK_SIGNAL.extend(B_SIGNAL)
             
     return np.array(PSK_SIGNAL)
+# ---------------------------------------------------------
+# ===================== Demodulador: ======================
+def DEMOD_BPSK(Signal, F):
+    '''Recibimos señales con ruido que simula la transmición de
+    datos en medios reales. Aproxymamos el valor real de la señal
+    reduciendo el ruido y determinamos la secuencia de bitrs de 
+    la señal demodulada.'''
+    SIGNAL_BLOCKs = []
+    Base = 0
+    
+    Time     = np.linspace(0, 1, 1000)
+    BIT_0 = np.sin(2 * np.pi * F * Time + 0)
+    BIT_1 = np.sin(2 * np.pi * F * Time + np.pi)
+    
+    SIGNAL_Bits  = len(Signal) / F
 
-'''
-# Prueba
-codigo = "110101011101"                     # Ejemplo de código.
-senal_PSK = PSK(codigo)
+    for i in SIGNAL_Bits:
+        # Generamos la lista con las señales de cada bit.
+        SIGNAL_BLOCKs.append(Signal[Base : 1000])
 
-# Tiempo de la señal:
-tiempo_total = np.linspace(0, len(senal_PSK) / 1000, len(senal_PSK))
-
-# Graficar la señal:
-plt.figure(figsize=(10, 4))
-plt.plot(tiempo_total, senal_PSK)
-plt.title('Señal Modulada PSK')
-plt.xlabel('Tiempo (s)')
-plt.ylabel('Amplitud')
-plt.grid(True)
-plt.show()
-'''
+              
+    return 0
+# ---------------------------------------------------------
