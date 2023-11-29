@@ -36,42 +36,27 @@ def DEMOD_BPSK(Signal, F):
     reduciendo el ruido y determinamos la secuencia de bitrs de 
     la señal demodulada.'''
     SIGNAL_BLOCKs = []
-    F_A = 0
-    F_B = F
+    DEMOD_SIGNAL = []
     
-    Time     = np.linspace(0, 1, 1000)
+    Time  = np.linspace(0, 1, 1000)
     BIT_0 = np.sin(2 * np.pi * F * Time + 0)
     BIT_1 = np.sin(2 * np.pi * F * Time + np.pi)
     
     SIGNAL_Bits  = len(Signal) / F
     
-    while SIGNAL_Bits != 0:
-        # Generamos la lista con las señales de cada bit.
-        SIGNAL_BLOCKs.append(Signal[F_A : F_B])
-        F_A  = F_B + 1
-        F_B += 2
+    for i in range(0, len(Signal), F):
+        SIGNAL_BLOCKs.append(Signal[ i : i + F])
+
+    for SIGNAL_i in SIGNAL_BLOCKs:
+        '''Calcular correlacón y comparar con las mascaras, semejanza de mayor 
+        valor indica si es 1 o 0.'''
+        CORRELACION_1 = np.correlate(BIT_1, 0.5 * SIGNAL_i)           # Correlacion entre la mascara y la señal del bit 1.
+        CORRELACION_0 = np.correlate(BIT_0, 0.5 * SIGNAL_i)
         
-        SIGNAL_Bits += -1
-
-    SEÑAL_BLOQUE_1 = SIGNAL_BLOCKs[0]                           # Bloque de la señal del primer bit
-    
-    CORRELACION    = np.correlate(BIT_1, SEÑAL_BLOQUE_1)           # Correlacion entre la mascara y la señal del bit 1.
-    
-    SIGNAL_ERROR   = np.abs(CORRELACION) / np.linalg.norm(BIT_1)*np.linalg.norm(SEÑAL_BLOQUE_1)
-    
-    if  SIGNAL_ERROR > 0.8:
-        plt.figure(figsize=(10, 4))
-        plt.plot(BIT_1, label='Señal 1')
-        plt.plot(SEÑAL_BLOQUE_1, label='Señal 2')
-        plt.title('Comparación de Señales')
-        plt.xlabel('Tiempo')
-        plt.ylabel('Amplitud')
-        plt.legend()
-        plt.grid(True)
-        plt.show()
-    else:
-        print("Las señales no son lo suficientemente similares para graficarlas juntas.")
-
-              
-    return 0
+        if CORRELACION_1 > CORRELACION_0:
+            DEMOD_SIGNAL.extend(BIT_1)
+        else:
+            DEMOD_SIGNAL.extend(BIT_0)
+        
+    return DEMOD_SIGNAL
 # ---------------------------------------------------------
