@@ -9,53 +9,70 @@ El mensaje que enviaremos en la simulación se encuentra en:
 ```
 PySIM/datasets/INPUT.txt
 ```
-Y la simulación tomará en cuenta que este archivo de text fue previamente generado.
+Y la simulación tomará en cuenta que este archivo de texto fue previamente generado.
 
 ## Codificación de la fuente:
-Para la codificación de la fuente implementamos el algoritmo de Huffman. El código para la codificacion de la fuente se encuentra en:
+Para la codificación de la fuente implementamos el algoritmo de Huffman. El código para la codificación de la fuente se encuentra en:
 ```
 PySIM/src/CODIFICADOR.py
 ```
+### Ejemplo:
+Para ejemplificar los resultados de la simulación tomamos como texto el código de entrada **110101011101**. La codificación de Huffman para este texto es **110101011101**
 
 ## Codificación del canal:
-Implementamos el algoritmos de [Hamming](https://www.youtube.com/watch?v=WdmGSWrcMvM) para condificar el código generado en la etapa de codificacion de fuente; este algoritmo nos permite la corrección de errores en la recepción del mensaje, incorporando bits de paridad al código.
+Implementamos el algoritmo de [Hamming](https://www.youtube.com/watch?v=WdmGSWrcMvM) para codificar el código generado en la etapa de codificación de fuente; este algoritmo nos permite la corrección de errores en la recepción del mensaje, incorporando bits de paridad al código.
+
+El código de la codificación Hamming se encuentra en:
 ```
 PySIM/src/HAMMING.py
 ```
+### Ejemplo:
+Al ingresar el código generado por el algoritmo de Huffman, la codificación Hamming resultante es **10111010010111011**
 
 ## Modulación:
-Para la modulación del codigo generado por el algoritmo de Hamming, utilizaremos BPSK, que nos permite representar los bits codificados por medio de 2 fases de onda portadora.
+Para la modulación del código generado por el algoritmo de Hamming, utilizaremos BPSK, que nos permite representar los bits codificados por medio de 2 fases de onda portadora.
 ```
 PySIM/src/PSK.py
 ```
 ### Ejemplo:
-Al recibir el codigo de bits "110101011101", la codificación PSK genera la siguiente señal de salida:
+Al recibir el código de bits "110101011101", la codificación PSK genera la siguiente señal de salida:
 
-![Señal PSK.](images/PSK_EJEMPLO_110101011101.png)
+![Señal PSK.](images/PSK_EJEMPLO.png)
 
 ## Transmisión:
-Simulamos un medio con ruido y una atenuacion de la señal del 50%, para simular componentes y medios ruidosos que podríamos esperar en la aplicación real de un proyecto de este estilo.
+Simulamos un medio con ruido y una atenuación de la señal del 50%, para simular componentes y medios ruidosos que podríamos esperar en la aplicación real de un proyecto de este estilo.
 ```
 PySIM/src/TRANSMISION.py
 ```
 ### Ejemplo:
-Para la señal transmitida utilizamos el resultado de la señal PSK que diseñamos en la etapa de modulación, el grafico de la señal transmitida es el siguiete:
+Para la señal transmitida utilizamos el resultado de la señal PSK que diseñamos en la etapa de modulación, el grafico de la señal transmitida es el siguiente:
 
-![Señal transmitida.](images/TRANS_EJEMPLO_110101011101.png)
+![Señal transmitida.](images/TRANS_EJEMPLO.png)
 
 ## Demodulación:
-Para demodular la señal transmitida utilizamos un comparador individual de señales; para conocer si el resultado de la transmisión con ruido representa un 0 o un 1. La comparación entre la señal del primer bit enviado y las mascaras de las señales para 0 y 1 es:
+Para demodular la señal transmitida utilizamos un comparador individual de señales; para conocer si el resultado de la transmisión con ruido representa un 0 o un 1. La comparación entre la señal del primer bit enviado y las máscaras de las señales para 0 y 1 es:
 
 ![Señal comparada para el primer bit.](images/COMP_BIT1.png)
 
 ### Ejemplo:
 Continuando con nuestro ejemplo, la señal demodulada del código de ejemplo es:
 
-![Señal Demodulada.](images/DEMOD_EJEMPLO_110101011101.png)
+![Señal Demodulada.](images/DEMOD_EJEMPLO.png)
 
-Que coincide con la señal modulada.
+Que coincide con la señal modulada. Generando el código **10111010010111011**, que coincide por el código generado en la etapa de *codificación de canal*.
 
-El codigo de la demodulación se encuentra en:
+La demodulación se encuentra en:
 ```
 PySIM/src/PSK.py
 ```
+
+## Decodificación de canal:
+Manteniendo la lógica de la simulación, implementamos la extracción de código codificado por el algoritmo de Hamming.
+
+El código de la decodificación Hamming se encuentra en:
+```
+PySIM/src/HAMMING.py
+```
+
+### Ejemplo:
+Al ejecutar la simulación el código decodificado es **110101011101**; que era el texto inicial de nuestro ejemplo.
