@@ -36,8 +36,8 @@ def DEMOD_BPSK(Signal, F):
     reduciendo el ruido y determinamos la secuencia de bitrs de 
     la señal demodulada.'''
     SIGNAL_BLOCKs = []
-    DEMOD_SIGNAL = []
-    
+    DEMOD_SIGNAL  = []
+    BITS_DEMOD    = ''     
     Time  = np.linspace(0, 1, 1000)
     BIT_0 = np.sin(2 * np.pi * F * Time + 0)
     BIT_1 = np.sin(2 * np.pi * F * Time + np.pi)
@@ -55,8 +55,10 @@ def DEMOD_BPSK(Signal, F):
         
         if CORRELACION_1 > CORRELACION_0:
             DEMOD_SIGNAL.extend(BIT_1)
+            BITS_DEMOD += '1'    
         else:
             DEMOD_SIGNAL.extend(BIT_0)
+            BITS_DEMOD += '0' 
         
-    return DEMOD_SIGNAL
+    return DEMOD_SIGNAL, BITS_DEMOD
 # ---------------------------------------------------------

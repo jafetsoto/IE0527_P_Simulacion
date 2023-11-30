@@ -13,7 +13,7 @@ def HAMMING(TEXT):
     j = 0                                                   # Contador para completar TXT_PARIDAD. 
     # --------------------------------------
     # Preparar el codigo con los bit de paridad:
-    while 2**P < (m+P)+1:                                   # Encontrar Bits de Paridad necesarios.
+    while 2**P < (m + P) + 1:                               # Encontrar Bits de Paridad necesarios.
         P += 1
         
     TXT_PARIDAD = [None] * (m + P)                          # (m+r) cantidad de bits; un espacio en lista para cada bit.
@@ -32,7 +32,7 @@ def HAMMING(TEXT):
         P_POS   = 2**i -1
         COUNTER = 0
         
-        for j in range(P_POS, m + P, 2 * (P_POS + 1)):        # range(start, stop, step)
+        for j in range(P_POS, m + P, 2 * (P_POS + 1)):      # range(start, stop, step)
             for k in range(j, min(j + (P_POS + 1), m + P)):
                 if TXT_PARIDAD[k] == '1':
                     COUNTER += 1
@@ -43,3 +43,58 @@ def HAMMING(TEXT):
             TXT_PARIDAD[P_POS] = '1'      
     # --------------------------------------
     return ''.join(TXT_PARIDAD)
+# ---------------------------------------------------------
+def Hamming_DECODE(Signal, BITS_REG):
+    '''Función para decodificar código Hamming. Calculamos los bitr de 
+    paridad y creamos una lista con espacio para los bits de texto del 
+    mensaje (sin P bits); buscamos la posicoón de los P bits i guardamos 
+    los bits de texto del codigo; '''
+    m = len(BITS_REG)
+    P = 1
+    
+    j = 0
+    
+    Parity_BITS = []
+    B_ERROR = 0
+    # --------------------
+    while 2**P < (m + P) + 1:
+        P += 1
+
+    DECODE_Hamming = [None] * (m - P)
+    
+    for p_i in range(P):
+        Parity_BITS.append(2**p_i)
+    
+    for i in range(m):                                      # Separamos los bits de texto
+        if (i + 1) not in Parity_BITS:
+            DECODE_Hamming[j] = BITS_REG[i]
+            j+=1
+    # --------------------------------------
+    # Determinar los bit de paridad:
+    for i in range (P):                                     # Buscar las posiciones de los bits de paridad.
+        P_POS   = 2**i -1
+        COUNTER = 0
+        
+        for j in range(P_POS, m, 2 * (P_POS + 1)):
+            for k in range(j, min(j + (P_POS + 1), m)):
+                if BITS_REG[k] == '1':
+                    COUNTER += 1
+        
+        # Verificar errores:
+        if COUNTER % 2 != 0:
+            B_ERROR = 1
+            error_POS = P_POS
+            # Corregir error:
+            DECODE_Hamming[error_POS] = '1' if DECODE_Hamming[error_POS] == '0' else '0'
+    
+    if B_ERROR: 
+        print("Error en:", error_POS)
+    else:
+        print("No se detectaron errores.")
+        
+        
+    print (DECODE_Hamming)
+    
+    
+    return ''.join(DECODE_Hamming)
+    

@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from CODIFICADOR import *
-from HAMMING import HAMMING
+from HAMMING import HAMMING, Hamming_DECODE
 from PSK import *
 from TRANSMISION import Transmision
 # ---------------------------------------------------------
@@ -33,15 +33,15 @@ def graf_Signal(PSK_SIGNAL, fs, TITLE):
 # ---------------------------------------------------------
 # Carga el mensaje:
 TEXT = GET_MENSAJE()
-
+TEXT_PRUEBA = '110101011101'
 # Codificar por Huffman para la funete:
-TEXT_CODIF, CODIGOS = CODIFICADOR(TEXT)
+CODE_Huff, CODIGOS_sim = CODIFICADOR(TEXT_PRUEBA)
 
 # Codificar por Hamming para el canal:
-TEXT_CANAL = HAMMING(TEXT_CODIF)
-TEXT_PRUEBA = '110101011101'
+CODE_Hamm = HAMMING(CODE_Huff)
+
 # Modular la señal:
-SIGNAL_PSK   = BPSK(TEXT_PRUEBA)
+SIGNAL_PSK   = BPSK(CODE_Hamm)
 graf_Signal(SIGNAL_PSK, 1000, 'Señal modulada (BPSK).')
 
 # Simular transmisión:
@@ -49,15 +49,20 @@ SIGNAL_TRANSMIT = Transmision(SIGNAL_PSK)
 graf_Signal(SIGNAL_TRANSMIT, 1000, 'Señal transmitida.')
 
 # Demodular la señal recibida: 
-DEMOD_TEXT = DEMOD_BPSK(SIGNAL_TRANSMIT, 1000)
-graf_Signal(DEMOD_TEXT,1000, 'Señal demodulada.')
+SIGNAL_DEMOD, CODE_DEMOD = DEMOD_BPSK(SIGNAL_TRANSMIT, 1000)
+graf_Signal(SIGNAL_DEMOD,1000, 'Señal demodulada.')
+
+# Decodificación Hamming:
+DECODE_HM = Hamming_DECODE(SIGNAL_DEMOD, CODE_DEMOD)
 
 # ---------------------------------------------------------
 print("============================================================")
 print("Mensaje de entrada   :\n", TEXT)
-print("Mensaje Codif Huffman:\n", TEXT_CODIF)
-print("Codigos:\n", CODIGOS)
-print("Mensaje Codif Hamming:\n", TEXT_CANAL)
+print("Mensaje Codif Huffman:\n", CODE_Huff)
+print("Codigos:\n", CODIGOS_sim)
+print("Codif Hamming   :\n", CODE_Hamm)
+print("Decode Hamming  :\n", CODE_DEMOD)
+print("Decode Huffman  :\n", DECODE_HM)
 print("============================================================")
 # ---------------------------------------------------------
 # =========================================================
