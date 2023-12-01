@@ -91,10 +91,6 @@ def Hamming_DECODE(Signal, BITS_REG):
         print("Error en:", error_POS)
     else:
         print("No se detectaron errores.")
-        
-        
-    print (DECODE_Hamming)
-    
     
     return ''.join(DECODE_Hamming)
     
