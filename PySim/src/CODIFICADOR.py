@@ -1,4 +1,5 @@
 # ---------------------------------------------------------
+# ================ Codificador de fuente: =================
 class NODO:
     '''Clase diseñada para contener el nodo de los simbolos del arbol
     de Huffman, almacenamos el caracter(simbolo), su frecuencia y la 
@@ -61,14 +62,18 @@ def SET_Huffman_CODIGOS(RAIZ, SIMBOL_CODE = "" , CODIGOS = None):
         SET_Huffman_CODIGOS(RAIZ.r_derecha, SIMBOL_CODE + "1", CODIGOS)
     return CODIGOS
 # ---------------------------------------------------------
-def CODIFICADOR(TEXT):
+def Huffman_CODING(TEXT):
     '''Funcion principal de la codificacion de canal, se debe llamar cuando
     se desea codificar texto de entra en el la fuente. Utiliza el metodo join()
     para generar el texto coficicado con los codigos de los simbolos.'''
-    RAIZ_Huffman     = SET_Huffman_ARBOL(TEXT)
+    RAIZ_Huffman = SET_Huffman_ARBOL(TEXT)
     CODIGOS = SET_Huffman_CODIGOS(RAIZ_Huffman)
     
     TEXT_CODFIFICADO = "".join(CODIGOS[simbolo] for simbolo in TEXT)
     
     return TEXT_CODFIFICADO, CODIGOS
 # ---------------------------------------------------------
+# =============== Decodificador de fuente: ================
+def Huffman_DECODE(Codigo):
+    
+    return 0

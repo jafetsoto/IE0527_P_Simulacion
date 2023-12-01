@@ -1,17 +1,15 @@
 # =========================================================
 # ---------------------------------------------------------
 # Bibliotecas:
-from tkinter.tix import TEXT
 import numpy as np
 import matplotlib.pyplot as plt
 
 from CODIFICADOR import *
-from HAMMING import HAMMING, Hamming_DECODE
+from HAMMING import *
 from PSK import *
 from TRANSMISION import Transmision
 # ---------------------------------------------------------
 # =========================================================
-# ----------------------- Main: ---------------------------
 def GET_MENSAJE():
     '''Se carga el archivo de texto, enviado desde la casa para simular.
         Outputs: TEXT (varible que contiene el archivo de texto.)'''
@@ -31,14 +29,15 @@ def graf_Signal(PSK_SIGNAL, fs, TITLE):
     plt.grid(True)
     plt.show()
 # ---------------------------------------------------------
+# ----------------------- Main: ---------------------------
 # Carga el mensaje:
 TEXT = GET_MENSAJE()
 TEXT_PRUEBA = '110101011101'
 # Codificar por Huffman para la funete:
-CODE_Huff, CODIGOS_sim = CODIFICADOR(TEXT_PRUEBA)
+CODE_Huff, CODIGOS_sim = Huffman_CODING(TEXT_PRUEBA)
 
 # Codificar por Hamming para el canal:
-CODE_Hamm = HAMMING(CODE_Huff)
+CODE_Hamm = Hamming_CODING(CODE_Huff)
 
 # Modular la señal:
 SIGNAL_PSK   = BPSK(CODE_Hamm)
@@ -55,14 +54,19 @@ graf_Signal(SIGNAL_DEMOD,1000, 'Señal demodulada.')
 # Decodificación Hamming:
 DECODE_HM = Hamming_DECODE(SIGNAL_DEMOD, CODE_DEMOD)
 
+# Decodificación Huffman:
+DECODE_HF = Huffman_DECODE(DECODE_HM)
 # ---------------------------------------------------------
+# -------------------- Resultados: ------------------------
 print("============================================================")
-print("Mensaje de entrada   :\n", TEXT)
-print("Mensaje Codif Huffman:\n", CODE_Huff)
-print("Codigos:\n", CODIGOS_sim)
-print("Codif Hamming   :\n", CODE_Hamm)
-print("Decode Hamming  :\n", CODE_DEMOD)
-print("Decode Huffman  :\n", DECODE_HM)
+print("======================= Simulación =========================")
+print("= Mensaje de texto:\n", TEXT)
+print("= Codigos de los simbolos:\n", CODIGOS_sim)
+print("= Mensaje codificado por Huffman:\n", CODE_Huff)
+print("= Código codificado por Hamming:\n", CODE_Hamm)
+print("= Decodificación por Hamming:\n", CODE_DEMOD)
+print("= Decodificación por Huffman:\n", DECODE_HM)
+print("= Mensaje recibido:\n", DECODE_HF)
 print("============================================================")
 # ---------------------------------------------------------
 # =========================================================

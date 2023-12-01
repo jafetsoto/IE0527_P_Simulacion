@@ -1,4 +1,4 @@
-def HAMMING(TEXT):
+def Hamming_CODING(TEXT):
     '''Cargamos la cantidad de bits que tiene nuestro mensaje de entrada
     y determinamos los bits de paridad necesarios para la transmisión, creamos 
     una lista que toma en cuneta la cantidad de bits de texto y bits de paridad 

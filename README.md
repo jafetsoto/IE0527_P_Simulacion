@@ -76,3 +76,6 @@ PySIM/src/HAMMING.py
 
 ### Ejemplo:
 Al ejecutar la simulación el código decodificado es **110101011101**; que era el texto inicial de nuestro ejemplo.
+
+## Decodificación de fuente:
+Una vez que obtenemos el código decodificado de la señal transmitida, debos realizar la decodificación de Huffman, para conocer el texto original que fue enviado.
