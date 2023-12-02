@@ -32,11 +32,10 @@ def graf_Signal(PSK_SIGNAL, fs, TITLE):
 # ----------------------- Main: ---------------------------
 # Carga el mensaje:
 TEXT = GET_MENSAJE()
-TEXT_PRUEBA = 'Funcional.'
-print(TEXT)
+# TEXT_PRUEBA = 'Funcional.'
 
 # Codificar por Huffman para la funete:
-CODE_Huff, CODIGOS_sim = Huffman_CODING(TEXT_PRUEBA)
+CODE_Huff, CODIGOS_sim = Huffman_CODING(TEXT)
 
 # Codificar por Hamming para el canal:
 CODE_Hamm = Hamming_CODING(CODE_Huff)

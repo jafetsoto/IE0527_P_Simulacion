@@ -154,7 +154,6 @@ def Huffman_DECODE(Codigo):
             DEC_frec = int(F_sim_Bits, 2)
             
             Simbolos[Simbol] = '0' * DEC_frec
-    print('XxXxXxX',Simbolos)
     
     # Recuperar frecuencias:
     FREC = ''
