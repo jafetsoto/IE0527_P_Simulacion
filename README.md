@@ -12,7 +12,7 @@ PySIM/datasets/INPUT.txt
 Y la simulación tomará en cuenta que este archivo de texto fue previamente generado.
 
 ## Codificación de la fuente:
-Para la codificación de la fuente implementamos el algoritmo de Huffman. El código para la codificación de la fuente se encuentra en:
+Para la codificación de la fuente implementamos el algoritmo de [Huffman](https://www.youtube.com/watch?v=dM6us854Jk0). El código para la codificación de la fuente se encuentra en:
 ```
 PySIM/src/CODIFICADOR.py
 ```
