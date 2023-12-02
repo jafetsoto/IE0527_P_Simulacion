@@ -1,3 +1,4 @@
+from ast import Break
 # ---------------------------------------------------------
 # Estructuras de datos:
 class NODO:
@@ -103,17 +104,85 @@ def Huffman_CODING(TEXT):
         
         N_Bits  = len(Arbol_CODE)
         N_Bytes = N_Bits // 8
-    
-    # Metadatos: tamaño del codigo del arbol(Bytes), codigo del arbol.
     N_Bytes = bin(N_Bytes).replace("0b", "").zfill(4)
     
-    print(N_Bytes, Arbol_CODE)
+    # Agrgar bits de tamaño tamaño de codigo del simbolo:
+    FrecSize_CODE = ''
+    for sim, k in CODIGOS.items():
+        Bits_F_sim = bin(len(k)).replace("0b", "").zfill(4)
+        
+        FrecSize_CODE += Bits_F_sim
     
-    TEXT_CODFIFICADO = N_Bytes + Arbol_CODE + TEXT_CODFIFICADO
+    # Agregar bits de frecuencia:
+    Frec_Sim = ''
+    for sim, k in CODIGOS.items():
+        Frec_Sim += k
+    
+    # Metadatos:
+    print(N_Bytes, Arbol_CODE, FrecSize_CODE, Frec_Sim, TEXT_CODFIFICADO)
+    TEXT_CODFIFICADO = N_Bytes + Arbol_CODE + FrecSize_CODE + Frec_Sim + TEXT_CODFIFICADO
     
     return TEXT_CODFIFICADO, CODIGOS
 # ---------------------------------------------------------
 # =============== Decodificador de fuente: ================
 def Huffman_DECODE(Codigo):
+    # Metadatos: 4Bits de tamaño de codigo del arbol.
+    Arbol_Size = int(Codigo[:4], 2)
+    Arbol_Code = Codigo[4 : (Arbol_Size * 8) + 4]
+        
+    Simbolos   = {}
+
+    # Recuperar simbolos:
+    while len(Arbol_Code) >= 6:
+        Simbol_Bits = Arbol_Code[:6]
+        Arbol_Code  = Arbol_Code[6:]
+         
+        for Simbol, Code in diccionario_simbolos.items():
+            if Simbol_Bits == Code:
+                Simbolos[Simbol] = '0'
     
-    return 0
+    # Recuperar tamaños de frecuencias:
+    F_Code_i = (Arbol_Size * 8) + 4
+    F_Code_F = F_Code_i + len(Simbolos) * 4
+    FrecSize_Code  = Codigo[F_Code_i : F_Code_F]
+    
+    while len(FrecSize_Code) > 0:
+        
+        for Simbol, Code in Simbolos.items():
+            F_sim_Bits = FrecSize_Code[:4]
+            FrecSize_Code  = FrecSize_Code[4:]
+            DEC_frec = int(F_sim_Bits, 2)
+            
+            Simbolos[Simbol] = '0' * DEC_frec
+    print('XxXxXxX',Simbolos)
+    
+    # Recuperar frecuencias:
+    FREC = ''
+    FrecSim_Code = Codigo[F_Code_F:]
+    
+    for Simbol, Code in Simbolos.items():
+        FREC = FrecSim_Code[:len(Code)]
+        FrecSim_Code = FrecSim_Code[len(Code):]
+
+        Simbolos[Simbol] = FREC
+           
+    # Recuperar texto:
+    Text_Code = FrecSim_Code
+    Target_C = ''
+    Text     = ''
+    
+    Bits_S = 1
+
+    while len(Text_Code) > 0:
+        Target_C += Text_Code[:Bits_S]
+        Text_Code = Text_Code[Bits_S:]
+        
+        for S, C in Simbolos.items():
+            if Target_C == C:
+                Text += S
+                Target_C = ''
+        
+        if Bits_S > len(Text_Code):
+            Break
+    
+    return Text

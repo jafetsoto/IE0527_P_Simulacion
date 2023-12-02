@@ -1,7 +1,1 @@
-Este repositorio almacena el codigo y recursos necesarios para simular 
-la comunicacion entre una habitacion de una casa y una casita de arbol 
-en el jardin; se establece un mensaje de texto de entrada que esta 
-previamente generado, codificamos el mensaje en la fuente utilizando 
-el algoritmo de Huffman y para la codificacion del canal se utilizara 
-Hamming para agregar la capacidad de deteccion de errores; la señal se 
-transmitira por radiofrecuencia.
+Funcional

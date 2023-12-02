@@ -32,7 +32,9 @@ def graf_Signal(PSK_SIGNAL, fs, TITLE):
 # ----------------------- Main: ---------------------------
 # Carga el mensaje:
 TEXT = GET_MENSAJE()
-TEXT_PRUEBA = 'abbcccddddeeeeeffffff'
+TEXT_PRUEBA = 'Funcional.'
+print(TEXT)
+
 # Codificar por Huffman para la funete:
 CODE_Huff, CODIGOS_sim = Huffman_CODING(TEXT_PRUEBA)
 
