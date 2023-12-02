@@ -12,7 +12,15 @@ PySIM/datasets/INPUT.txt
 Y la simulación tomará en cuenta que este archivo de texto fue previamente generado.
 
 ## Codificación de la fuente:
-Para la codificación de la fuente implementamos el algoritmo de [Huffman](https://www.youtube.com/watch?v=dM6us854Jk0). El código para la codificación de la fuente se encuentra en:
+Para la codificación de la fuente implementamos el algoritmo de [Huffman](https://www.youtube.com/watch?v=dM6us854Jk0). Una vez que hemos codificado el texto, procedemos a codificar el arbol, incorporando meta datos a la señal del texto codificado. La estructura de nuestra señal es la siguiente:
+
+![Estructura de la codificación.](images/Estructura_señal_fuente.png)
+
+Primero añadimos 4 bits que indican el tamaño en bytes del código que define el árbol de Huffman; la señal codificada del árbol se forma representando los símbolos en grupos de 6 bits, que se decodifican con el <diccionario_simbolos{}>, estos grupos de 6 bits se acomodan da mayor a menor frecuencia en la codificación del árbol; seguidamente se agregan los tamaños de las frecuencias que se indican en un paquete de 4 bits para cada símbolo, finalmente se toman los bits del código de Huffman de cada símbolo, se concatenan y se agrega el código del texto codificado al final del código completo de la señal codificada en la fuente. 
+> [!IMPORTANT]
+> Esto metadatos no se aprecian en las señales de ejemplo, debido aumentan cociderablemente la cantidad de bit y no permiten apreciar claramente las señales.
+
+El código para la codificación de la fuente se encuentra en:
 ```
 PySIM/src/CODIFICADOR.py
 ```
